@@ -62,3 +62,5 @@ group :test do
   gem 'chromedriver-helper'
 end
 
+
+gem 'mini_racer', platforms: :ruby
