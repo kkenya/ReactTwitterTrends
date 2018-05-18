@@ -28,7 +28,7 @@ export default class HelloWorld extends React.Component {
           Hello, {this.state.name}!
         </h3>
         <hr />
-        <form >
+        <form>
           <label htmlFor="name">
             Say hello to:
           </label>
