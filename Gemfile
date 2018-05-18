@@ -18,7 +18,7 @@ gem 'webpacker'
 # Use react on rails
 gem 'react_on_rails'
 # See https://github.com/rails/execjs#readme for more supported runtimes
-gem 'mini_racer', '0.1.15', platforms: :ruby
+# gem 'mini_racer', platforms: :ruby
 
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
@@ -62,5 +62,3 @@ group :test do
   gem 'chromedriver-helper'
 end
 
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
