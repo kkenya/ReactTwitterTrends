@@ -34,5 +34,6 @@
 yarn-debug.log*
 .yarn-integrity
 
-# Ignore intellij IDE dotfiles.
+# Ignore IntelliJ IDEA dotfiles
 .idea
+*.iml
