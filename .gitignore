@@ -34,6 +34,12 @@
 yarn-debug.log*
 .yarn-integrity
 
+# Ignore bundler gems
+vender/bundle
+
 # Ignore IntelliJ IDEA dotfiles
 .idea
 *.iml
+
+# Ignore environment variables with dotenv-rails
+.env

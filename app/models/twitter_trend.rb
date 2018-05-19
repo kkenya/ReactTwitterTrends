@@ -1,0 +1,2 @@
+class TwitterTrend < ApplicationRecord
+end
