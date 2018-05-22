@@ -35,7 +35,7 @@ yarn-debug.log*
 .yarn-integrity
 
 # Ignore bundler gems
-vender/bundle
+vendor/bundle
 
 # Ignore IntelliJ IDEA dotfiles
 .idea
