@@ -9,14 +9,12 @@ import Typography from '@material-ui/core/Typography';
 
 const styles = theme => ({
   root: {
-    flexGrow: 1, // todo
+    // flexGrow: 1, // フレックスアイテムの伸び率
+    marginBottom: 5,
   },
-  card: {
-    minWidth: 275,
-  },
-  title: {
-    marginBottom: 16,
-    fontSize: 14,
+  item: {
+    margin: 10,
+    // fontSize: 14,
   },
   pos: {
     marginBottom: 12,
@@ -34,21 +32,36 @@ class TwitterTrends extends Component {
   }
 
   renderTrends = (trends) => {
+    const { classes } = this.props;
     const items = [];
+
     trends.map((trend) => {
-      items.push(<li key={trend}>{trend}</li>);
+      items.push(
+        <Grid item xs={2} key={trend.name} className={classes.item}>
+          <Card>
+            <CardContent>
+              <Typography>
+                {trend.name}
+              </Typography>
+              <Typography>
+                {/*the last 24 hours is also returned for many trends if this is available.*/}
+                {trend.tweet_volume}
+              </Typography>
+            </CardContent>
+          </Card>
+        </Grid>
+      );
     });
 
     return (
-      <ul>
+      <Grid container className={classes.trends} justify="center" spacing={16}>
         {items}
-      </ul>
+      </Grid>
     );
   };
 
   render() {
     const { classes } = this.props;
-    const { spacing } = this.state;
     const trendsList = this.renderTrends(this.state.trends);
 
     return (
@@ -58,15 +71,13 @@ class TwitterTrends extends Component {
           <Grid item xs={12}>
             <Card className={classes.card}>
               <CardContent>
-                <Typography className={classes.title} color="textSecondary">
+                <Typography variant="headline" component="h2">
                   Twitter Trends
                 </Typography>
               </CardContent>
             </Card>
           </Grid>
-          <Grid container className={classes.demo} justify="center" spacing={Number(spacing)}>
-            {trendsList}
-          </Grid>
+          {trendsList}
         </Grid>
       </React.Fragment>
     );

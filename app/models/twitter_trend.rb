@@ -1,17 +1,26 @@
 class TwitterTrend < ApplicationRecord
-  attr_accessor :trend_titles
+  validates :name, presence: true
+  validates :url, presence: true
+  attr_accessor :all
+
+  def get_trends
+    request
+  end
 
   def get_trend_titles
     names = []
-    trends.each do |trend|
+    request.each do |trend|
       names.push(trend['name'])
     end
     names
   end
 
+  scope :beginning_minute, -> {where("created_at >= ?", Time.zone.now.beginning_of_minute).order(tweet_volume: :desc).last(50)}
+
   private
-    def get_request(dir = 'https://api.twitter.com/1.1/trends/place.json?id=1118370')
-      uri = URI.parse(dir)
+
+    def get_request
+      uri = URI.parse('https://api.twitter.com/1.1/trends/place.json?id=1118370')
       https = Net::HTTP.new(uri.host, uri.port)
       https.use_ssl = true
       req = Net::HTTP::Get.new(uri.request_uri)
@@ -20,7 +29,22 @@ class TwitterTrend < ApplicationRecord
       https.request(req)
     end
 
-    def trends
-      JSON.parse(get_request.body)[0]['trends']
+    def request
+      # todo remove benchmark
+      result = Benchmark.realtime do
+        if Time.zone.now.beginning_of_minute > TwitterTrend.last.created_at
+          trends = JSON.parse(get_request.body)[0]['trends']
+          trends.each do |t|
+            TwitterTrend.create!(
+                name: t['name'],
+                url: t['url'],
+                tweet_volume: t['tweet_volume'],
+            )
+          end
+        end
+        @trends = TwitterTrend.beginning_minute
+      end
+      puts result
+      @trends
     end
 end

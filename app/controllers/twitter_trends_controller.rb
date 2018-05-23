@@ -6,7 +6,7 @@ class TwitterTrendsController < ApplicationController
 
   def index
     trends = TwitterTrend.new
-    trends.trend_titles = trends.get_trend_titles
-    @twitter_trends_props = {trends: trends.trend_titles}
+    trends.all = trends.get_trends
+    @twitter_trends_props = {trends: trends.all}
   end
 end
