@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { withStyles } from '@material-ui/core/styles';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar'
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -30,6 +32,26 @@ class TwitterTrends extends Component {
     };
     console.log(this.props.trends);
   }
+
+  renderHeader = ({ classes }) => {
+    const styles = {
+      root: {
+        flexGrow: 1,
+      },
+    };
+
+    return (
+      <div className={classes.root}>
+        <AppBar position="static" color="default">
+          <Toolbar>
+            <Typography variant="title" color="inherit">
+              Title
+            </Typography>
+          </Toolbar>
+        </AppBar>
+      </div>
+    );
+  };
 
   renderTrends = (trends) => {
     const { classes } = this.props;
@@ -62,12 +84,14 @@ class TwitterTrends extends Component {
 
   render() {
     const { classes } = this.props;
+    const header = this.renderHeader(this.props);
     const trendsList = this.renderTrends(this.state.trends);
 
     return (
       <React.Fragment>
         <CssBaseline />
         <Grid container className={classes.root} spacing={16}>
+          {header}
           <Grid item xs={12}>
             <Card className={classes.card}>
               <CardContent>
