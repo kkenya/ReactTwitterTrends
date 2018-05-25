@@ -3,24 +3,18 @@ import PropTypes from 'prop-types';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
 
-import ShowTrends from './ShowTrends';
 import ShowHeader from './ShowHeader';
+import ShowTrends from './ShowTrends';
+import ShowTrend from './ShowTrend';
 
 const styles = theme => ({
   root: {
     // flexGrow: 1, // フレックスアイテムの伸び率
     marginBottom: 5,
   },
-  item: {
-    margin: 10,
-    // fontSize: 14,
-  },
-  pos: {
-    marginBottom: 12,
+  trends: {
+    marginTop: theme.spacing.unit * 3,
   },
 });
 
@@ -34,55 +28,24 @@ class TwitterTrends extends Component {
     console.log(this.props.trends);
   }
 
-  renderTrends = (trends) => {
-    const { classes } = this.props;
-    const items = [];
-
-    trends.map((trend) => {
-      items.push(
-        <Grid item xs={2} key={trend.name} className={classes.item}>
-          <Card>
-            <CardContent>
-              <Typography>
-                {trend.name}
-              </Typography>
-              <Typography>
-                {/*the last 24 hours is also returned for many trends if this is available.*/}
-                {trend.tweet_volume}
-              </Typography>
-            </CardContent>
-          </Card>
-        </Grid>
-      );
-    });
-
-    return (
-      <Grid container className={classes.trends} justify="center" spacing={16}>
-        {items}
-      </Grid>
-    );
-  };
-
   render() {
     const { trends, classes } = this.props;
-    const trendsList = this.renderTrends(trends);
 
     return (
       <React.Fragment>
         <CssBaseline />
-        <Grid container className={classes.root} spacing={16}>
-          <ShowHeader />
-          <Grid item xs={12}>
-            {/*<Card className={classes.card}>*/}
-              {/*<CardContent>*/}
-                {/*<Typography variant="headline" component="h2">*/}
-                  {/*Twitter Trends*/}
-                {/*</Typography>*/}
-              {/*</CardContent>*/}
-            {/*</Card>*/}
-            <ShowTrends data={trends}/>
+        <ShowHeader />
+        <Grid container justify="center" className={classes.root} spacing={16}>
+          <Grid item xs={10} className={classes.trends}>
+            <ShowTrends data={trends} />
           </Grid>
-          {trendsList}
+          {trends.map(trend => {
+            return (
+              <Grid item xs={10} key={trend.id}>
+                <ShowTrend data={trend} />
+              </Grid>
+            );
+          })}
         </Grid>
       </React.Fragment>
     );

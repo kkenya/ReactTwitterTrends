@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import Typography from '@material-ui/core/Typography';
 import TableHead from '@material-ui/core/TableHead';
 import TableBody from '@material-ui/core/TableBody';
 import Table from '@material-ui/core/Table';
@@ -9,7 +11,6 @@ import TableCell from '@material-ui/core/TableCell';
 import TableFooter from '@material-ui/core/TableFooter';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
 import IconButton from '@material-ui/core/IconButton';
 import FirstPageIcon from '@material-ui/icons/FirstPage';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
@@ -96,10 +97,6 @@ TablePaginationActions.propTypes = {
 const TablePaginationActionsWrapped = withStyles(actionStyles, { withTheme: true })(TablePaginationActions);
 
 const styles = theme => ({
-  root: {
-    width: '80%',
-    marginTop: theme.spacing.unit * 3,
-  },
   table: {
     minWidth: 500,
   },
@@ -135,14 +132,23 @@ class CustomPaginationActionsTable extends Component {
     const emptyRows = rowsPerPage - Math.min(rowsPerPage, data.length - page * rowsPerPage);
 
     return (
-      <Grid container justify="center" spacing={8}>
-      <Grid item xs={11}>
-        <Paper>
+      <Card>
+        <CardContent>
+          <Typography gutterBottom variant="headline" component="h2">
+            トレンド
+          </Typography>
+          <Typography component="p">
+              日本のトレンドワードを表示します
+          </Typography>
+          <Typography color="textSecondary">
+            {/*the last 24 hours is also returned for many trends if this is available.*/}
+            Tweet Volumeは24時間でそのワードがどれだけ呟かれたかを表示可能な場合示します
+          </Typography>
           <div className={classes.tableWrapper}>
             <Table className={classes.table}>
               <TableHead>
                 <TableRow>
-                  <TableCell>Trend</TableCell>
+                  <TableCell>Topic</TableCell>
                   <TableCell className={classes.tableCell}>Tweet Volume</TableCell>
                 </TableRow>
               </TableHead>
@@ -178,9 +184,8 @@ class CustomPaginationActionsTable extends Component {
               </TableFooter>
             </Table>
           </div>
-        </Paper>
-      </Grid>
-      </Grid>
+        </CardContent>
+      </Card>
     );
   }
 }

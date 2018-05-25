@@ -20,7 +20,7 @@ class TwitterTrend < ApplicationRecord
   private
 
     def get_request
-      uri = URI.parse('https://api.twitter.com/1.1/trends/place.json?id=1118370')
+      uri = URI.parse('https://api.twitter.com/1.1/trends/place.json?id=1110809')
       https = Net::HTTP.new(uri.host, uri.port)
       https.use_ssl = true
       req = Net::HTTP::Get.new(uri.request_uri)
