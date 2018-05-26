@@ -1,13 +1,11 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {withStyles} from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 
-const styles = theme => ({
-
-});
+const styles = theme => ({});
 
 class ShowTrend extends Component {
   constructor(props) {
@@ -18,7 +16,7 @@ class ShowTrend extends Component {
   }
 
   render() {
-    const {data} = this.props;
+    const { data } = this.props;
 
     return (
       <Card>
