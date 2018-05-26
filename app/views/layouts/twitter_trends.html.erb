@@ -3,7 +3,10 @@
 <head>
   <title>Twitter Trends</title>
   <%= csrf_meta_tags %>
-  <%= javascript_pack_tag 'twitter-trends-bundle' %>
+  <%= csp_meta_tag %>
+
+  <%= javascript_pack_tag 'twitter-trends-bundle', 'data-turbolinks-track': 'reload' %>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
 </head>
 
 <body>

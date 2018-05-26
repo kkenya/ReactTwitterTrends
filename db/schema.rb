@@ -10,13 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_19_071747) do
+ActiveRecord::Schema.define(version: 2018_05_23_150236) do
 
   create_table "twitter_trends", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
-    t.string "link", null: false
+    t.string "url", null: false
+    t.integer "tweet_volume"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["tweet_volume"], name: "index_twitter_trends_on_tweet_volume"
   end
 
 end

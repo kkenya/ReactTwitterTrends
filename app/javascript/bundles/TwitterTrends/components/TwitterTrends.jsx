@@ -1,128 +1,60 @@
 import React, { Component } from 'react';
-import {
-  BrowserRouter as Router,
-  Route,
-  Link,
-} from 'react-router-dom';
-import YouTube from 'react-youtube';
+import PropTypes from 'prop-types';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import { withStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
 
-const Home = () => (
-  <div>
-    <h2>Home</h2>
-  </div>
-);
+import ShowHeader from './ShowHeader';
+import ShowTrends from './ShowTrends';
+import ShowTrend from './ShowTrend';
 
-class YouTubePlayer extends Component {
-  render() {
-    const opts = {
-      height: '390',
-      width: '640',
-      playerVars: {
-        autoplay: 1,
-      },
-    };
-    return (
-      <div>
-        <YouTube
-          videoId="3GddCIGLrp8"
-          opts={opts}
-          onReady={this._onReady}
-        />
-      </div>
-    );
-  }
-
-  _onReady = (event) => {
-    // access to player in all event handlers via event.target
-    event.target.pauseVideo();
-  };
-}
-
-class Trends extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { trends: this.props.trends };
-    console.log(this.props.trends);
-  }
-
-  render() {
-    const trends = [];
-    this.state.trends.map((item) => {
-      trends.push(<li key={item}>{item}</li>);
-    });
-    return (
-      <div>
-        <h1>Twitter Trends</h1>
-        <ul>
-          <li>{trends}</li>
-        </ul>
-      </div>
-    );
-  }
-}
-
-const Topic = ({ match }) => (
-  <div>
-    <h3>{match.params.topicId}</h3>
-  </div>
-);
-
-const Topics = ({ match }) => (
-  <div>
-    <h2>Topics</h2>
-    <ul>
-      <li>
-        <Link to={`${match.url}/rendering`}>
-          Rendering with React
-        </Link>
-      </li>
-      <li>
-        <Link to={`${match.url}/components`}>
-          Components
-        </Link>
-      </li>
-      <li>
-        <Link to={`${match.url}/props-v-state`}>
-          Props v. State
-        </Link>
-      </li>
-    </ul>
-
-    <Route path={`${match.url}/:topicId`} component={Topic} />
-    <Route exact path={match.path} render={() => (
-      <h3>Please select a topic.</h3>
-    )} />
-  </div>
-);
+const styles = theme => ({
+  root: {
+    // flexGrow: 1, // フレックスアイテムの伸び率
+    marginBottom: 5,
+  },
+  trends: {
+    marginTop: theme.spacing.unit * 3,
+  },
+});
 
 class TwitterTrends extends Component {
   constructor(props) {
     super(props);
-    this.state = { trends: this.props.trends };
+    this.state = {
+      trends: this.props.trends,
+      spacing: '16',
+    };
     console.log(this.props.trends);
   }
 
   render() {
+    const { trends, classes } = this.props;
+
     return (
-      <Router>
-        <div>
-          <ul>
-            <li><Link to="/">Home</Link></li>
-            <li><Link to="/topics">Topics</Link></li>
-            <li><Link to="/trends">Trends</Link></li>
-            <li><Link to="/youtube">Youtube</Link></li>
-          </ul>
-
-          <hr />
-
-          <Route exact path="/" component={Home} />
-          <Route path="/topics" component={Topics} />
-          <Route path="/trends" component={Trends} />
-          <Route path="/youtube" component={YouTubePlayer} />
-        </div>
-      </Router>
+      <React.Fragment>
+        <CssBaseline />
+        <ShowHeader />
+        <Grid container justify="center" className={classes.root} spacing={16}>
+          <Grid item xs={10} className={classes.trends}>
+            <ShowTrends data={trends} />
+          </Grid>
+          {trends.map(trend => {
+            return (
+              <Grid item xs={10} key={trend.id}>
+                <ShowTrend data={trend} />
+              </Grid>
+            );
+          })}
+        </Grid>
+      </React.Fragment>
     );
   }
 }
 
-export default TwitterTrends;
+TwitterTrends.propTypes = {
+  trends: PropTypes.array.isRequired,
+  classes: PropTypes.object.isRequired,
+};
+
+export default withStyles(styles)(TwitterTrends);

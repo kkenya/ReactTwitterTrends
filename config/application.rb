@@ -17,3 +17,5 @@ module ReactOnRails
     # the framework and any gems in your application.
   end
 end
+
+Rails.application.config.time_zone = 'Asia/Tokyo'
