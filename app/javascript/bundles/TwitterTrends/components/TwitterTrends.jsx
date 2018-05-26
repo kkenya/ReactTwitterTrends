@@ -26,6 +26,7 @@ class TwitterTrends extends Component {
       spacing: '16',
     };
     console.log(this.props.trends);
+    console.log(this.props.tweets);
   }
 
   render() {
@@ -54,6 +55,7 @@ class TwitterTrends extends Component {
 
 TwitterTrends.propTypes = {
   trends: PropTypes.array.isRequired,
+  tweets: PropTypes.array.isRequired,
   classes: PropTypes.object.isRequired,
 };
 
