@@ -4,7 +4,7 @@ class Tweet < ApplicationRecord
   attr_accessor :all
 
   def search
-    request("めめめ")
+    request("ペヤング")
   end
 
   private

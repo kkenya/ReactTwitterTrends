@@ -18,11 +18,11 @@ const styles = theme => ({
   },
 });
 
+// todo purecomponent
 class TwitterTrends extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      trends: this.props.trends,
       spacing: '16',
     };
     console.log(this.props.trends);
@@ -30,7 +30,7 @@ class TwitterTrends extends Component {
   }
 
   render() {
-    const { trends, classes } = this.props;
+    const { trends, tweets, classes } = this.props;
 
     return (
       <React.Fragment>
@@ -40,13 +40,19 @@ class TwitterTrends extends Component {
           <Grid item xs={10} className={classes.trends}>
             <ShowTrends data={trends} />
           </Grid>
-          {trends.map(trend => {
-            return (
-              <Grid item xs={10} key={trend.id}>
-                <ShowTrend data={trend} />
-              </Grid>
-            );
-          })}
+          {/*{trends.map(trend => {*/}
+            {/*return (*/}
+              {/*<Grid item xs={10} key={trend.id}>*/}
+                {/*<ShowTrend trend={trend} />*/}
+              {/*</Grid>*/}
+            {/*);*/}
+          {/*})}*/}
+          <Grid item xs={10}>
+          <ShowTrend
+            trend={trends[0]}
+            tweets={tweets}
+          />
+          </Grid>
         </Grid>
       </React.Fragment>
     );
