@@ -5,9 +5,8 @@ import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
+
+import ShowTweet from './ShowTweet';
 
 const styles = theme => ({});
 
@@ -20,7 +19,7 @@ class ShowTrend extends Component {
   }
 
   render() {
-    const { trend, tweets } = this.props;
+    const { trend } = this.props;
 
     return (
       <Card>
@@ -33,20 +32,7 @@ class ShowTrend extends Component {
           </Typography>
         </CardContent>
         <Grid item xs={10} key={trend.id}>
-          <List component="nav">
-            {tweets.map((tweet) => {
-              return (
-                <div key={tweet.id}>
-                  <ListItem>
-                    <ListItemText primary={tweet.user.name} />
-                  </ListItem>
-                  <ListItem>
-                    <ListItemText primary={tweet.text} />
-                  </ListItem>
-                </div>
-              );
-            })}
-          </List>
+          <ShowTweet />
         </Grid>
       </Card>
     );

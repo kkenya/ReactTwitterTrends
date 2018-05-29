@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { withStyles } from '@material-ui/core/styles';
@@ -18,50 +18,27 @@ const styles = theme => ({
   },
 });
 
-// todo purecomponent
-class TwitterTrends extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      spacing: '16',
-    };
-    console.log(this.props.trends);
-    console.log(this.props.tweets);
-  }
-
-  render() {
-    const { trends, tweets, classes } = this.props;
-
-    return (
-      <React.Fragment>
-        <CssBaseline />
-        <ShowHeader />
-        <Grid container justify="center" className={classes.root} spacing={16}>
-          <Grid item xs={10} className={classes.trends}>
-            <ShowTrends data={trends} />
-          </Grid>
-          {/*{trends.map(trend => {*/}
-            {/*return (*/}
-              {/*<Grid item xs={10} key={trend.id}>*/}
-                {/*<ShowTrend trend={trend} />*/}
-              {/*</Grid>*/}
-            {/*);*/}
-          {/*})}*/}
-          <Grid item xs={10}>
+const TwitterTrends = ({ trends, classes }) => {
+  return (
+    <React.Fragment>
+      <CssBaseline />
+      <ShowHeader />
+      <Grid container justify="center" className={classes.root} spacing={16}>
+        <Grid item xs={10} className={classes.trends}>
+          <ShowTrends data={trends} />
+        </Grid>
+        <Grid item xs={10}>
           <ShowTrend
             trend={trends[0]}
-            tweets={tweets}
           />
-          </Grid>
         </Grid>
-      </React.Fragment>
-    );
-  }
-}
+      </Grid>
+    </React.Fragment>
+  );
+};
 
 TwitterTrends.propTypes = {
   trends: PropTypes.array.isRequired,
-  tweets: PropTypes.array.isRequired,
   classes: PropTypes.object.isRequired,
 };
 
