@@ -1,66 +1,64 @@
-import React, { Component } from 'react';
+import React from 'react';
+// import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
+import Card from '@material-ui/core/Card';
+import CardHeader from '@material-ui/core/CardHeader';
+import CardContent from '@material-ui/core/CardContent';
+import Avatar from '@material-ui/core/Avatar';
+import Typography from '@material-ui/core/Typography';
 
-const styles = theme => ({});
+const styles = theme => ({
+  table: {
+    minWidth: 500,
+  },
+  tableWrapper: {
+    overflowX: 'auto',
+  },
+  tableCell: {
+    textAlign: 'right',
+  },
+});
 
-class ShowTweets extends Component {
-  constructor(props) {
-    super(props);
-    this.state = ({
-      tweets: [],
-    });
-  }
+const ShowTweet = ({ tweet }) => {
+  // formatDate = (created) => {
+  //   created.split(' ');
+  // };
 
-  componentDidMount() {
-    const config = {
-      headers: {
-        'Accept': 'application/json',
-      },
-    };
-
-    fetch('/tweet', config)
-      .then(response => {
-        if (response.ok) {
-          return response.json();
-        }
-        throw new error('network response was not ok');
-      })
-      .then(json => {
-        console.log(json);
-        this.setState({
-          tweets: json,
-        });
-      })
-      .catch(error => console.log(error));
-  }
-
-  render() {
-    const { tweets } = this.state;
-
-    return (
-      <List component="nav">
-        {tweets.map((tweet) => {
-          return (
-            <div key={tweet.id}>
-              <ListItem>
-                <ListItemText primary={tweet.user.name} />
-              </ListItem>
-              <ListItem>
-                <ListItemText primary={tweet.text} />
-              </ListItem>
-            </div>
-          );
-        })}
-      </List>
-    );
-  }
-}
-
-ShowTweets.propTypes = {
+  return (
+    <div>
+      <Card>
+        <CardHeader
+          avatar={
+            <Avatar
+              alt={tweet.user.name}
+              src={tweet.user.profile_image_url_https}
+            />
+          }
+          title={`${tweet.user.name} (@${tweet.user.screen_name})`}
+          // title={
+          //   <div>
+          //     <Typography variant="title" gutterBottom>
+          //       {tweet.user.name}
+          //     </Typography>
+          //     <Typography variant="headline" gutterBottom>
+          //       {`@${tweet.user.screen_name}`}
+          //     </Typography>
+          //   </div>
+          // }
+          subheader={tweet.created_at}
+        />
+        <CardContent>
+          <Typography component="p">
+            {tweet.text}
+          </Typography>
+        </CardContent>
+      </Card>
+    </div>
+  );
 };
 
-export default withStyles(styles)(ShowTweets);
+// ShowTweet.propTypes = {
+//   tweet: PropTypes.object.isRequired(),
+// };
 
+export default ShowTweet;
