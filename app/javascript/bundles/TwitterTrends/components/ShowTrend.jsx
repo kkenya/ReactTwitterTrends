@@ -5,7 +5,7 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 
-import ShowTweets from './ShowTweets';
+import TweetsList from './TweetsList';
 
 class ShowTrend extends Component {
   constructor(props) {
@@ -29,15 +29,19 @@ class ShowTrend extends Component {
           </Typography>
         </CardContent>
         <Grid item xs={10} key={trend.id}>
-          <ShowTweets />
+          <TweetsList />
         </Grid>
       </Card>
     );
   }
 }
 
-// ShowTrend.propTypes = {
-//   trend: PropTypes.object.isRequired,
-// };
+ShowTrend.propTypes = {
+  trend: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    tweet_volume: PropTypes.number.isRequired,
+    id: PropTypes.number.isRequired,
+  })
+};
 
 export default ShowTrend;

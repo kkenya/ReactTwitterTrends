@@ -3,7 +3,7 @@ import List from '@material-ui/core/List';
 
 import ShowTweet from './ShowTweet';
 
-class ShowTweets extends Component {
+class TweetsList extends Component {
   constructor(props) {
     super(props);
     this.state = ({
@@ -26,7 +26,6 @@ class ShowTweets extends Component {
         throw new error('network response was not ok');
       })
       .then(json => {
-        console.log(json);
         this.setState({
           tweets: json,
         });
@@ -36,15 +35,17 @@ class ShowTweets extends Component {
 
   render() {
     const { tweets } = this.state;
-    // todo remove
-    console.log(this.state.tweets);
 
     return (
+      // todo タイトル大きくする
+      // todo tweet_volumeの表示
+      // todo 画像を取得し並べる
+      // todo スクロールView画面サイズに合わせる
       <List component="nav">
         {tweets.map((tweet) => {
           return (
             <div key={tweet.id}>
-              {/*<ShowTweet tweet={tweet} />*/}
+              <ShowTweet tweet={tweet} />
             </div>
           );
         })}
@@ -53,5 +54,5 @@ class ShowTweets extends Component {
   }
 }
 
-export default ShowTweets;
+export default TweetsList;
 

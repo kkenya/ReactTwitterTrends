@@ -5,7 +5,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 
 import ShowHeader from './ShowHeader';
-import ShowTrends from './ShowTrends';
+import TrendsTable from './TrendsTable';
 import ShowTrend from './ShowTrend';
 
 const styles = theme => ({
@@ -25,9 +25,10 @@ const TwitterTrends = ({ trends, classes }) => {
       <ShowHeader />
       <Grid container justify="center" className={classes.root} spacing={16}>
         <Grid item xs={10} className={classes.trends}>
-          <ShowTrends data={trends} />
+          <TrendsTable data={trends} />
         </Grid>
         <Grid item xs={10}>
+          {/*todo remove トレンドの表示をテストする*/}
           <ShowTrend
             trend={trends[0]}
           />
@@ -37,9 +38,9 @@ const TwitterTrends = ({ trends, classes }) => {
   );
 };
 
-// TwitterTrends.propTypes = {
-//   trends: PropTypes.array.isRequired,
-//   classes: PropTypes.object.isRequired,
-// };
+TwitterTrends.propTypes = {
+  trends: PropTypes.array.isRequired,
+  classes: PropTypes.object.isRequired,
+};
 
 export default withStyles(styles)(TwitterTrends);
