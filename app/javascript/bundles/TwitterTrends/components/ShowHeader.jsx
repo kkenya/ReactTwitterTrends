@@ -12,18 +12,18 @@ const styles = {
 };
 
 const ShowHeader = (props) => {
-  const {classes} = props;
+  const { classes } = props;
 
-  return(
-      <div className={classes.root}>
-          <AppBar position="static">
-          <Toolbar>
-            <Typography variant="title" color="inherit">
-              Twitter Trends
-            </Typography>
-          </Toolbar>
-        </AppBar>
-      </div>
+  return (
+    <div className={classes.root}>
+      <AppBar position="static">
+        <Toolbar style={{ backgroundColor: '#000000' }}>
+          <Typography variant="title" color="inherit">
+            Twitter Trends
+          </Typography>
+        </Toolbar>
+      </AppBar>
+    </div>
   );
 };
 
