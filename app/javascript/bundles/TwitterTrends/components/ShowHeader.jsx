@@ -17,7 +17,7 @@ const ShowHeader = (props) => {
   return(
       <div className={classes.root}>
           <AppBar position="static">
-          <Toolbar>
+          <Toolbar style={{backgroundColor: '#000000'}}>
             <Typography variant="title" color="inherit">
               Twitter Trends
             </Typography>
@@ -27,8 +27,8 @@ const ShowHeader = (props) => {
   );
 };
 
-ShowHeader.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
+// ShowHeader.propTypes = {
+//   classes: PropTypes.object.isRequired,
+// };
 
 export default withStyles(styles)(ShowHeader);

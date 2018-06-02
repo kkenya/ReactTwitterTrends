@@ -1,18 +1,7 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
-import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
-import CardContent from '@material-ui/core/CardContent';
-import Avatar from '@material-ui/core/Avatar';
-import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 import ShowTweet from './ShowTweet';
-
-const styles = theme => ({});
 
 class ShowTweets extends Component {
   constructor(props) {
@@ -47,13 +36,15 @@ class ShowTweets extends Component {
 
   render() {
     const { tweets } = this.state;
+    // todo remove
+    console.log(this.state.tweets);
 
     return (
       <List component="nav">
         {tweets.map((tweet) => {
           return (
             <div key={tweet.id}>
-              <ShowTweet tweet={tweet}/>
+              {/*<ShowTweet tweet={tweet} />*/}
             </div>
           );
         })}
@@ -62,8 +53,5 @@ class ShowTweets extends Component {
   }
 }
 
-ShowTweets.propTypes = {
-};
-
-export default withStyles(styles)(ShowTweets);
+export default ShowTweets;
 

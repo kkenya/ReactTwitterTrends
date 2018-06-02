@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 
-import ShowTweet from './ShowTweets';
-
-const styles = theme => ({});
+import ShowTweets from './ShowTweets';
 
 class ShowTrend extends Component {
   constructor(props) {
@@ -32,15 +29,15 @@ class ShowTrend extends Component {
           </Typography>
         </CardContent>
         <Grid item xs={10} key={trend.id}>
-          <ShowTweet />
+          <ShowTweets />
         </Grid>
       </Card>
     );
   }
 }
 
-ShowTrend.propTypes = {
-  trend: PropTypes.object.isRequired,
-};
+// ShowTrend.propTypes = {
+//   trend: PropTypes.object.isRequired,
+// };
 
-export default withStyles(styles)(ShowTrend);
+export default ShowTrend;

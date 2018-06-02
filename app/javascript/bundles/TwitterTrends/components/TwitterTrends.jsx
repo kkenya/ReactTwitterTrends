@@ -37,9 +37,9 @@ const TwitterTrends = ({ trends, classes }) => {
   );
 };
 
-TwitterTrends.propTypes = {
-  trends: PropTypes.array.isRequired,
-  classes: PropTypes.object.isRequired,
-};
+// TwitterTrends.propTypes = {
+//   trends: PropTypes.array.isRequired,
+//   classes: PropTypes.object.isRequired,
+// };
 
 export default withStyles(styles)(TwitterTrends);
