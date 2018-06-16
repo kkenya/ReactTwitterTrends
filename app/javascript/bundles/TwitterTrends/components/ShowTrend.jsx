@@ -7,16 +7,13 @@ import Typography from '@material-ui/core/Typography';
 
 import TweetsList from './TweetsList';
 
+// todo pure component
 class ShowTrend extends Component {
-  constructor(props) {
-    super(props);
-    this.state = ({
-      trend: this.props.trend,
-    });
-  }
-
   render() {
-    const { trend } = this.props;
+    const { trends, match } = this.props;
+    const trend = trends[match.params.id];
+    // todo remove
+    console.log(trend);
     const tweet_volume = trend.tweet_volume ?
       <Typography color="textSecondary">
         Tweet volume {trend.tweet_volume}
@@ -40,11 +37,14 @@ class ShowTrend extends Component {
 }
 
 ShowTrend.propTypes = {
-  trend: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    tweet_volume: PropTypes.number.isRequired,
-    id: PropTypes.number.isRequired,
-  })
+  trends: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
+      tweet_volume: PropTypes.number,
+    }),
+  ),
+  match: PropTypes.object.isRequired,
 };
 
 export default ShowTrend;

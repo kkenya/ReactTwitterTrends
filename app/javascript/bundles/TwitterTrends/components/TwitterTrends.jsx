@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import { withStyles } from '@material-ui/core/styles';
 import {
   BrowserRouter,
   Route,
@@ -13,6 +12,7 @@ import ShowHeader from './ShowHeader';
 import TrendsTable from './TrendsTable';
 import ShowTrend from './ShowTrend';
 
+// todo cssファイルに分離
 const styles = theme => ({
   root: {
     flexGrow: 1, // フレックスアイテムの伸び率
@@ -23,20 +23,14 @@ const styles = theme => ({
   },
 });
 
-const TwitterTrends = ({ trends, classes }) => {
+const TwitterTrends = ({ trends }) => {
   return (
     <React.Fragment>
       <CssBaseline />
       <ShowHeader />
-      <Grid container justify="center" className={classes.root} spacing={16}>
-        <Grid item xs={10} className={classes.trends}>
+      <Grid container justify="center" className="root" spacing={16}>
+        <Grid item xs={10} className="trends">
           <TrendsTable data={trends} />
-        </Grid>
-        <Grid item xs={10}>
-          {/*todo remove トレンドの表示をテストする*/}
-          {/*<ShowTrend*/}
-            {/*trend={trends[0]}*/}
-          {/*/>*/}
         </Grid>
       </Grid>
     </React.Fragment>
@@ -44,32 +38,25 @@ const TwitterTrends = ({ trends, classes }) => {
 };
 
 TwitterTrends.propTypes = {
-  trends: PropTypes.array.isRequired,
-  classes: PropTypes.object.isRequired,
+  trends: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
+      tweet_volume: PropTypes.number,
+    }),
+  ),
 };
 
-export default withStyles(styles)(TwitterTrends);
+const Router = ({ trends }) => {
+  return (
+    <BrowserRouter>
+      <Switch>
+        <Route path="/" exact render={() => <TwitterTrends trends={trends} />} />
+        <Route path="/:id" render={({match}) => <ShowTrend trends={trends} match={match}/>} />
+      </Switch>
+    </BrowserRouter>
+  );
+};
 
-// todo remove
-// const Home = () => (
-//   <div>
-//     <h2>Home</h2>
-//   </div>
-// );
-//
-// const About = () => (
-//   <div>
-//     <h2>About</h2>
-//   </div>
-// );
-//
-// const App = () => (
-//   <BrowserRouter>
-//     <Switch>
-//       <Route path="/" exact  component={TwitterTrends} />
-//       <Route path="/about" component={About} />
-//     </Switch>
-//   </BrowserRouter>
-// );
-//
-// export default App;
+export default Router;
+

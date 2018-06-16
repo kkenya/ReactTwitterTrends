@@ -18,7 +18,7 @@ class TweetsList extends Component {
       },
     };
 
-    fetch('/tweet', config)
+    fetch('/tweets', config)
       .then(response => {
         if (response.ok) {
           return response.json();

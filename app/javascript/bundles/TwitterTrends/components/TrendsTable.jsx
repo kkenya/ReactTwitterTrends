@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -138,7 +139,7 @@ class CustomPaginationActionsTable extends Component {
             トレンド
           </Typography>
           <Typography component="p">
-              日本のトレンドワードを表示します
+            日本のトレンドワードを表示します
           </Typography>
           <Typography color="textSecondary">
             {/*the last 24 hours is also returned for many trends if this is available.*/}
@@ -153,11 +154,11 @@ class CustomPaginationActionsTable extends Component {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(n => {
+                {data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((n, index) => {
                   return (
                     <TableRow key={n.id}>
                       <TableCell component="th" scope="row">
-                        {n.name}
+                        <Link to={`/${index + 1}`}>{n.name}</Link>
                       </TableCell>
                       <TableCell numeric>{n.tweet_volume}</TableCell>
                     </TableRow>
