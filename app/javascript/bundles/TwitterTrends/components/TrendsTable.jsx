@@ -142,7 +142,7 @@ class CustomPaginationActionsTable extends Component {
           </Typography>
           <Typography color="textSecondary">
             {/*the last 24 hours is also returned for many trends if this is available.*/}
-            Tweet Volumeは24時間でそのワードがどれだけ呟かれたかを表示可能な場合示します
+            Tweet Volumeは24時間でそのワードがどれだけ呟かれたかを示します
           </Typography>
           <div className={classes.tableWrapper}>
             <Table className={classes.table}>

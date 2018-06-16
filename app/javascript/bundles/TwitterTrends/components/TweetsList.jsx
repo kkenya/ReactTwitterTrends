@@ -38,7 +38,6 @@ class TweetsList extends Component {
 
     return (
       // todo タイトル大きくする
-      // todo tweet_volumeの表示
       // todo 画像を取得し並べる
       // todo スクロールView画面サイズに合わせる
       <List component="nav">

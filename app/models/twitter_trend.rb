@@ -3,16 +3,8 @@ class TwitterTrend < ApplicationRecord
   validates :url, presence: true
   attr_accessor :all
 
-  def get
+  def get_all
     request
-  end
-
-  def get_titles
-    names = []
-    request.each do |trend|
-      names.push(trend['name'])
-    end
-    names
   end
 
   scope :latest, -> {where("created_at >= ?", Time.zone.now.beginning_of_minute).order(tweet_volume: :desc).last(50)}

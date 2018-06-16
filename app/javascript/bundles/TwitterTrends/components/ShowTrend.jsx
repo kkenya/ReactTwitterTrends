@@ -17,6 +17,11 @@ class ShowTrend extends Component {
 
   render() {
     const { trend } = this.props;
+    const tweet_volume = trend.tweet_volume ?
+      <Typography color="textSecondary">
+        Tweet volume {trend.tweet_volume}
+      </Typography>
+      : null;
 
     return (
       <Card>
@@ -24,9 +29,7 @@ class ShowTrend extends Component {
           <Typography gutterBottom variant="headline" component="h2">
             {trend.name}
           </Typography>
-          <Typography color="textSecondary">
-            {trend.tweet_volume}
-          </Typography>
+          {tweet_volume}
         </CardContent>
         <Grid item xs={10} key={trend.id}>
           <TweetsList />

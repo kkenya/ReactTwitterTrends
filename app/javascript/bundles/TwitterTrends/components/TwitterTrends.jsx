@@ -15,8 +15,7 @@ import ShowTrend from './ShowTrend';
 
 const styles = theme => ({
   root: {
-    // todo 不要なら削除
-    // flexGrow: 1, // フレックスアイテムの伸び率
+    flexGrow: 1, // フレックスアイテムの伸び率
     marginBottom: 5,
   },
   trends: {
@@ -35,9 +34,9 @@ const TwitterTrends = ({ trends, classes }) => {
         </Grid>
         <Grid item xs={10}>
           {/*todo remove トレンドの表示をテストする*/}
-          <ShowTrend
-            trend={trends[0]}
-          />
+          {/*<ShowTrend*/}
+            {/*trend={trends[0]}*/}
+          {/*/>*/}
         </Grid>
       </Grid>
     </React.Fragment>
@@ -49,28 +48,28 @@ TwitterTrends.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-// export default withStyles(styles)(TwitterTrends);
+export default withStyles(styles)(TwitterTrends);
 
 // todo remove
-const Home = () => (
-  <div>
-    <h2>Home</h2>
-  </div>
-);
-
-const About = () => (
-  <div>
-    <h2>About</h2>
-  </div>
-);
-
-const App = () => (
-  <BrowserRouter>
-    <Switch>
-      <Route path="/" exact  component={TwitterTrends} />
-      <Route path="/about" component={About} />
-    </Switch>
-  </BrowserRouter>
-);
-
-export default App;
+// const Home = () => (
+//   <div>
+//     <h2>Home</h2>
+//   </div>
+// );
+//
+// const About = () => (
+//   <div>
+//     <h2>About</h2>
+//   </div>
+// );
+//
+// const App = () => (
+//   <BrowserRouter>
+//     <Switch>
+//       <Route path="/" exact  component={TwitterTrends} />
+//       <Route path="/about" component={About} />
+//     </Switch>
+//   </BrowserRouter>
+// );
+//
+// export default App;

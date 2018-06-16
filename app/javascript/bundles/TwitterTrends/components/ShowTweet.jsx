@@ -7,10 +7,6 @@ import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 
 const ShowTweet = ({ tweet }) => {
-  // formatDate = (created) => {
-  //   created.split(' ');
-  // };
-
   return (
     <div className="tweetContainer">
       <Card>
