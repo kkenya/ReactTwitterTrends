@@ -158,7 +158,7 @@ class CustomPaginationActionsTable extends Component {
                   return (
                     <TableRow key={n.id}>
                       <TableCell component="th" scope="row">
-                        <Link to={`/${index + 1}`}>{n.name}</Link>
+                        <Link to={`/twitter_trends/${index + 1}/tweets`}>{n.name}</Link>
                       </TableCell>
                       <TableCell numeric>{n.tweet_volume}</TableCell>
                     </TableRow>

@@ -1,12 +1,16 @@
 class TweetController < ApplicationController
-  def show
-    tweets = Tweet.new
-    tweets.all = tweets.search
+  layout "twitter_trends"
+
+  def index
+    trends = TwitterTrend.get_all
+    @twitter_trends_props = {trends: trends}
+
+    tweets = Tweet.search
 
     respond_to do |format|
       format.html
       format.json {
-        render json: tweets.all
+        render json: tweets
       }
     end
   end
