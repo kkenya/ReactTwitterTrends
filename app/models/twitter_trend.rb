@@ -15,6 +15,7 @@ class TwitterTrend < ApplicationRecord
       JSON.parse(response_body)
     end
 
+    # todo controllerでcreate
     def get_all
       # 保存された最後のトレンドが1分前ならトレンドを取得し更新する
       if !TwitterTrend.last || Time.zone.now.beginning_of_minute > TwitterTrend.last.updated_at

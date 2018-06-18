@@ -154,13 +154,18 @@ class CustomPaginationActionsTable extends Component {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((n, index) => {
+                {data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((trend) => {
                   return (
-                    <TableRow key={n.id}>
+                    <TableRow key={trend.id}>
                       <TableCell component="th" scope="row">
-                        <Link to={`/twitter_trends/${index + 1}/tweets`}>{n.name}</Link>
+                        <Link to={{
+                          pathname: `/twitter_trends/${trend.id}/tweets`,
+                          state: { trend: trend },
+                        }}>
+                          {trend.name}
+                        </Link>
                       </TableCell>
-                      <TableCell numeric>{n.tweet_volume}</TableCell>
+                      <TableCell numeric>{trend.tweet_volume}</TableCell>
                     </TableRow>
                   );
                 })}

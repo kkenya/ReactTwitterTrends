@@ -7,8 +7,8 @@ import Typography from '@material-ui/core/Typography';
 
 import TweetsList from './TweetsList';
 
-const ShowTrend = ({ trends, match }) => {
-  const trend = trends[match.params.id - 1];
+const ShowTrend = ({ match, location }) => {
+  const trend = location.state.trend;
   const tweet_volume = trend.tweet_volume ?
     <Typography color="textSecondary">
       Tweet volume {trend.tweet_volume}
@@ -24,21 +24,23 @@ const ShowTrend = ({ trends, match }) => {
         {tweet_volume}
       </CardContent>
       <Grid item xs={10} key={trend.id}>
-        <TweetsList />
+        <TweetsList trend={trend} />
       </Grid>
     </Card>
   );
 };
 
 ShowTrend.propTypes = {
-  trends: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      name: PropTypes.string.isRequired,
-      tweet_volume: PropTypes.number,
-    }),
-  ),
   match: PropTypes.object.isRequired,
+  location: PropTypes.shape({
+    state: PropTypes.shape({
+      trend: PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        name: PropTypes.string.isRequired,
+        tweet_volume: PropTypes.number,
+      }),
+    }),
+  }),
 };
 
 export default ShowTrend;

@@ -1,21 +1,23 @@
-class TweetController < ApplicationController
+class TweetsController < ApplicationController
   layout "twitter_trends"
 
   def index
     trends = TwitterTrend.get_all
     @twitter_trends_props = {trends: trends}
+  end
 
+  def create
     tweets = Tweet.search
-
     respond_to do |format|
       format.html
       format.json {
         render json: tweets
       }
     end
+    p tweet_params
   end
 
   def tweet_params
-    params.require(:tweet).permit(:query)
+    params.require(:tweet).permit(:trend_name)
   end
 end

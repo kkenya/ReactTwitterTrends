@@ -53,7 +53,7 @@ const Router = ({ trends }) => {
       <Switch>
         <Route path="/" exact render={() => <TwitterTrends trends={trends} />} />
         <Route path="/twitter_trends" exact render={() => <TwitterTrends trends={trends} />} />
-        <Route path="/twitter_trends/:id/tweets" render={({match}) => <ShowTrend trends={trends} match={match}/>} />
+        <Route path="/twitter_trends/:id/tweets" component={ShowTrend} />
       </Switch>
     </BrowserRouter>
   );
