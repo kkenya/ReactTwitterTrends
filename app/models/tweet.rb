@@ -1,4 +1,5 @@
 class Tweet < ApplicationRecord
+  belongs_to :user
   validates :query, presence: true
 
   class << self

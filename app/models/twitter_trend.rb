@@ -1,4 +1,5 @@
 class TwitterTrend < ApplicationRecord
+  has_many :tweets
   validates :name, presence: true
   validates :url, presence: true
   scope :latest, -> {where("updated_at >= ?", Time.zone.now.beginning_of_minute).order(tweet_volume: :desc).last(50)}
