@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -138,11 +139,11 @@ class CustomPaginationActionsTable extends Component {
             トレンド
           </Typography>
           <Typography component="p">
-              日本のトレンドワードを表示します
+            日本のトレンドワードを表示します
           </Typography>
           <Typography color="textSecondary">
             {/*the last 24 hours is also returned for many trends if this is available.*/}
-            Tweet Volumeは24時間でそのワードがどれだけ呟かれたかを表示可能な場合示します
+            Tweet Volumeは24時間でそのワードがどれだけ呟かれたかを示します
           </Typography>
           <div className={classes.tableWrapper}>
             <Table className={classes.table}>
@@ -153,13 +154,18 @@ class CustomPaginationActionsTable extends Component {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(n => {
+                {data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((trend) => {
                   return (
-                    <TableRow key={n.id}>
+                    <TableRow key={trend.id}>
                       <TableCell component="th" scope="row">
-                        {n.name}
+                        <Link to={{
+                          pathname: `/twitter_trends/${trend.id}/tweets`,
+                          state: { trend: trend },
+                        }}>
+                          {trend.name}
+                        </Link>
                       </TableCell>
-                      <TableCell numeric>{n.tweet_volume}</TableCell>
+                      <TableCell numeric>{trend.tweet_volume}</TableCell>
                     </TableRow>
                   );
                 })}

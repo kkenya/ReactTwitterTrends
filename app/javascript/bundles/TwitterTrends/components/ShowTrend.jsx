@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
@@ -7,41 +7,40 @@ import Typography from '@material-ui/core/Typography';
 
 import TweetsList from './TweetsList';
 
-class ShowTrend extends Component {
-  constructor(props) {
-    super(props);
-    this.state = ({
-      trend: this.props.trend,
-    });
-  }
+const ShowTrend = ({ match, location }) => {
+  const trend = location.state.trend;
+  const tweet_volume = trend.tweet_volume ?
+    <Typography color="textSecondary">
+      Tweet volume {trend.tweet_volume}
+    </Typography>
+    : null;
 
-  render() {
-    const { trend } = this.props;
-
-    return (
-      <Card>
-        <CardContent>
-          <Typography gutterBottom variant="headline" component="h2">
-            {trend.name}
-          </Typography>
-          <Typography color="textSecondary">
-            {trend.tweet_volume}
-          </Typography>
-        </CardContent>
-        <Grid item xs={10} key={trend.id}>
-          <TweetsList />
-        </Grid>
-      </Card>
-    );
-  }
-}
+  return (
+    <Card>
+      <CardContent>
+        <Typography gutterBottom variant="headline" component="h2">
+          {trend.name}
+        </Typography>
+        {tweet_volume}
+      </CardContent>
+      <Grid item xs={10} key={trend.id}>
+        <TweetsList trend={trend} />
+      </Grid>
+    </Card>
+  );
+};
 
 ShowTrend.propTypes = {
-  trend: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    tweet_volume: PropTypes.number.isRequired,
-    id: PropTypes.number.isRequired,
-  })
+  match: PropTypes.object.isRequired,
+  location: PropTypes.shape({
+    state: PropTypes.shape({
+      trend: PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        name: PropTypes.string.isRequired,
+        tweet_volume: PropTypes.number,
+      }),
+    }),
+  }),
 };
 
 export default ShowTrend;

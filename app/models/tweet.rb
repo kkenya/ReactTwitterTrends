@@ -1,14 +1,8 @@
-require('cgi')
-
 class Tweet < ApplicationRecord
-  attr_accessor :all
+  belongs_to :user
+  validates :query, presence: true
 
-  def search
-    request("ペヤング")
-  end
-
-  private
-
+  class << self
     def request_api(query)
       uri = URI.parse("https://api.twitter.com/1.1/search/tweets.json?q=#{CGI.escape(query)}")
       https = Net::HTTP.new(uri.host, uri.port)
@@ -16,27 +10,28 @@ class Tweet < ApplicationRecord
       req = Net::HTTP::Get.new(uri.request_uri)
       req['Authorization'] = "Bearer #{ENV["BEARER_TOKEN"]}"
 
-      https.request(req)
+      response_body = https.request(req).body
+      JSON.parse(response_body)
     end
 
-    def request(query)
+    def search(query)
       # todo remove benchmark
       result = Benchmark.realtime do
-        # if Time.zone.now.beginning_of_minute > Tweet.last.created_at
-        #   trends = JSON.parse(request_api.body)[0]['trends']
-        #   trends.each do |t|
+        # # 保存された最後のトレンドが1分前ならトレンドを取得し更新する
+        # if !TwitterTrend.last || Time.zone.now.beginning_of_minute > TwitterTrend.last.updated_at
+        #   json = request_api['statuses']
+        #   json.each do |t|
         #     TwitterTrend.create!(
         #         name: t['name'],
         #         url: t['url'],
-        #         tweet_volume: t['tweet_volume'],
+        #         tweet_volume: t['tweet_volume']
         #     )
         #   end
         # end
-        # @tweets = TwitterTrend.beginning_minute
+        # TwitterTrend.latest
       end
-      tweets  = JSON.parse(request_api(query).body)['statuses']
       puts "trends request#{result}"
-      @tweets = tweets
+      request_api(query)['statuses']
     end
+  end
 end
-
