@@ -1,23 +1,13 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography';
 
-const styles = {
-  root: {
-    flexGrow: 1,
-  },
-};
-
-const ShowHeader = (props) => {
-  const { classes } = props;
-
+const ShowHeader = () => {
   return (
-    <div className={classes.root}>
+    <div className="pageHeader">
       <AppBar position="static">
-        <Toolbar style={{ backgroundColor: '#000000' }}>
+        <Toolbar className="headerToolbar">
           <Typography variant="title" color="inherit">
             Twitter Trends
           </Typography>
@@ -27,8 +17,4 @@ const ShowHeader = (props) => {
   );
 };
 
-ShowHeader.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
-
-export default withStyles(styles)(ShowHeader);
+export default ShowHeader;

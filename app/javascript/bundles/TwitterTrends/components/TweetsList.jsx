@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import axios from 'axios';
 import ReactOnRails from 'react-on-rails';
 import List from '@material-ui/core/List';
@@ -7,6 +8,11 @@ import List from '@material-ui/core/List';
 import ShowTweet from './ShowTweet';
 
 class TweetsList extends Component {
+  // todo calling propTypes validators directly is not supported
+  // static PropTypes = {
+  //   match: PropTypes.object.isRequired(),
+  // };
+
   constructor(props) {
     super(props);
     this.state = {
@@ -49,35 +55,32 @@ class TweetsList extends Component {
   }
 
   render() {
-    if(this.state.isLoading){
-      return(
+    if (this.state.isLoading) {
+      return (
         <div>
+          <CircularProgress size={50} />
         </div>
       );
     }
     const { tweets } = this.state;
 
     return (
-      // todo タイトル大きくする
-      // todo 画像を取得し並べる
-      // todo スクロールView画面サイズに合わせる
       <List component="nav">
         {tweets.map((tweet) => {
-          return (
-            <div key={tweet.id}>
-              <ShowTweet tweet={tweet} />
-            </div>
-          );
+          if (!tweet.retweeted_status) {
+            return (
+              <div key={tweet.id}>
+                <ShowTweet tweet={tweet} />
+              </div>
+            );
+          }
         })}
       </List>
     );
   }
 }
 
-// todo modify error
-// TweetsList.PropTypes = {
-//   match: PropTypes.object.isRequired(),
-// };
-
+// // todo modify error
+// TweetsList.export
 export default TweetsList;
 
