@@ -19,7 +19,6 @@ class ShowTweet extends Component {
 
     if (extendedEntities) {
       for (const i in extendedEntities.media) {
-        console.log(extendedEntities.media[i].media_url_https);
         list.push(
           <img
             key={i}
@@ -30,6 +29,17 @@ class ShowTweet extends Component {
     }
 
     return list;
+  };
+
+  renderCreatedAt = () => {
+    const createdAt = new Date(this.props.tweet.created_at);
+    const hour = createdAt.getHours();
+    const minutes = createdAt.getMinutes();
+    const year = createdAt.getFullYear();
+    const month = createdAt.getMonth() + 1;
+    const day = createdAt.getDate();
+    return `${hour}:${minutes} - ${year}年${month}月${day}日`;
+
   };
 
   // renderHashTags = () => {
@@ -49,6 +59,7 @@ class ShowTweet extends Component {
     const { tweet } = this.props;
     const renderMedia = this.renderMedia();
     // const renderHashTags = this.renderHashTags();
+    const renderCreatedAt = this.renderCreatedAt();
 
     return (
       <div className="tweetContainer">
@@ -80,14 +91,14 @@ class ShowTweet extends Component {
                   {/*{renderHashTags}*/}
                 </div>
                 <Typography color="textSecondary">
-                  {tweet.created_at}
+                  {renderCreatedAt}
                 </Typography>
-                <div>
+                <Grid container alignItems="center">
                   <RepeatIcon className="tweetIcons" />
                   {tweet.retweet_count}
                   <FavoriteIcon className="tweetIcons" />
                   {tweet.favorite_count}
-                </div>
+                </Grid>
               </CardContent>
             </Grid>
           </Grid>

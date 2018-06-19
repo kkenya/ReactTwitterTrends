@@ -14,6 +14,8 @@ class TwitterTrend < ApplicationRecord
 
       response_body = https.request(req).body
       JSON.parse(response_body)
+      # response_json = JSON.parse(response_body)
+      # response_json[0]['trends']
     end
 
     # todo controllerでcreate

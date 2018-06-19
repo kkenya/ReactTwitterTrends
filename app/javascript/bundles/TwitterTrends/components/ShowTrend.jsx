@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 
+import ShowHeader from './ShowHeader';
 import TweetsList from './TweetsList';
 
 const ShowTrend = ({ match, location }) => {
@@ -17,20 +18,23 @@ const ShowTrend = ({ match, location }) => {
   // todo 画像を取得し並べる
   // todo スクロールView画面サイズに合わせる
   return (
-    <Grid container justify="center" spacing={8}>
-      <Grid item xs={10}>
-        <Grid container justify="center" direction="row" className="showTrend">
-          <Grid item xs={5}> <Typography gutterBottom variant="headline" component="h1">
+    <div>
+      <ShowHeader />
+      <Grid container justify="center" spacing={8}>
+        <Grid item xs={10}>
+          <Grid container justify="center" direction="row" className="showTrend">
+            <Grid item xs={5}> <Typography gutterBottom variant="headline" component="h1">
               {trend.name}
             </Typography>
-            {tweet_volume}
-          </Grid>
-          <Grid item xs={5} className="tweetList">
-            <TweetsList trend={trend} />
+              {tweet_volume}
+            </Grid>
+            <Grid item xs={5} className="tweetList">
+              <TweetsList trend={trend} />
+            </Grid>
           </Grid>
         </Grid>
       </Grid>
-    </Grid>
+    </div>
   );
 };
 
