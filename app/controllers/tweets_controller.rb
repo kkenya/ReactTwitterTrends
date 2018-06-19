@@ -7,14 +7,14 @@ class TweetsController < ApplicationController
   end
 
   def create
-    tweets = Tweet.search
+    tweets = Tweet.search(tweet_params[:trend_name])
+
     respond_to do |format|
       format.html
       format.json {
         render json: tweets
       }
     end
-    p tweet_params
   end
 
   def tweet_params

@@ -13,7 +13,7 @@ class Tweet < ApplicationRecord
       JSON.parse(response_body)
     end
 
-    def search(query = 'ペヤング')
+    def search(query)
       # todo remove benchmark
       result = Benchmark.realtime do
         # # 保存された最後のトレンドが1分前ならトレンドを取得し更新する

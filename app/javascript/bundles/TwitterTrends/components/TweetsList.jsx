@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 import ReactOnRails from 'react-on-rails';
 import List from '@material-ui/core/List';
 
@@ -10,6 +11,7 @@ class TweetsList extends Component {
     super(props);
     this.state = {
       tweets: [],
+      isLoading: true,
     };
   }
 
@@ -33,22 +35,26 @@ class TweetsList extends Component {
       credentials: 'same-origin'
     };
 
-    fetch('/tweets', config)
-      .then(response => {
-        if (response.ok) {
-          return response.json();
-        }
-        throw new error('network response was not ok');
-      })
-      .then(json => {
+    axios.post('/tweets', formData, config)
+      .then((response) => {
+        console.log(response);
         this.setState({
-          tweets: json,
+          tweets: response.data,
+          isLoading: false,
         });
       })
-      .catch(error => console.log(error));
+      .catch((error) => {
+        console.log(error)
+      });
   }
 
   render() {
+    if(this.state.isLoading){
+      return(
+        <div>
+        </div>
+      );
+    }
     const { tweets } = this.state;
 
     return (
