@@ -1,0 +1,9 @@
+.pageHeader {
+  flex-grow: 1; // フレックスアイテムの伸び率を他のアイテムとの相対値（整数）で指定
+  margin-bottom: 2rem;
+}
+
+.headerToolbar {
+  background-color: #000000;
+}
+

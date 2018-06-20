@@ -12,32 +12,23 @@ import ShowHeader from './ShowHeader';
 import TrendsTable from './TrendsTable';
 import ShowTrend from './ShowTrend';
 
-// todo cssファイルに分離
-const styles = theme => ({
-  root: {
-    flexGrow: 1, // フレックスアイテムの伸び率
-    marginBottom: 5,
-  },
-  trends: {
-    marginTop: theme.spacing.unit * 3,
-  },
-});
-
-const TwitterTrends = ({ trends }) => {
+const App = ({ trends }) => {
   return (
     <React.Fragment>
       <CssBaseline />
       <ShowHeader />
-      <Grid container justify="center" className="root" spacing={16}>
-        <Grid item xs={10} className="trends">
-          <TrendsTable data={trends} />
+      <div className="trendsTableBody">
+        <Grid container justify="center" spacing={16}>
+          <Grid item xs={10}>
+            <TrendsTable data={trends} />
+          </Grid>
         </Grid>
-      </Grid>
+      </div>
     </React.Fragment>
   );
 };
 
-TwitterTrends.propTypes = {
+App.propTypes = {
   trends: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,
@@ -51,8 +42,8 @@ const Router = ({ trends }) => {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/" exact render={() => <TwitterTrends trends={trends} />} />
-        <Route path="/twitter_trends" exact render={() => <TwitterTrends trends={trends} />} />
+        <Route path="/" exact render={() => <App trends={trends} />} />
+        <Route path="/twitter_trends" exact render={() => <App trends={trends} />} />
         <Route path="/twitter_trends/:id/tweets" component={ShowTrend} />
       </Switch>
     </BrowserRouter>
