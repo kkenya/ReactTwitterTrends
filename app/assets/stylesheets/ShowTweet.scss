@@ -1,5 +1,5 @@
 .tweetContainer {
-  padding: 5px;
+  padding: 2px;
   background-color: lightgray;
 }
 
@@ -9,10 +9,11 @@
   margin-right: auto;
 }
 
-//.tweetText {
-//  border-bottom: solid 1px black;
-//}
-
 .tweetIcons {
+  color: #757575;
   font-size: 0.5rem;
+}
+
+.tweetIconCount {
+  color: #757575;
 }

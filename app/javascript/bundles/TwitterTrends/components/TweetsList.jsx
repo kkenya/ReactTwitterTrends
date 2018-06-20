@@ -55,6 +55,8 @@ class TweetsList extends Component {
   }
 
   render() {
+    const { tweets } = this.state;
+
     if (this.state.isLoading) {
       return (
         <div>
@@ -62,18 +64,15 @@ class TweetsList extends Component {
         </div>
       );
     }
-    const { tweets } = this.state;
 
     return (
       <List component="nav">
         {tweets.map((tweet) => {
-          if (!tweet.retweeted_status) {
-            return (
-              <div key={tweet.id}>
-                <ShowTweet tweet={tweet} />
-              </div>
-            );
-          }
+          return (
+            <div key={tweet.id}>
+              <ShowTweet tweet={tweet} />
+            </div>
+          );
         })}
       </List>
     );

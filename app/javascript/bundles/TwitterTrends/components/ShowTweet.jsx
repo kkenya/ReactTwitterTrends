@@ -95,9 +95,13 @@ class ShowTweet extends Component {
                 </Typography>
                 <Grid container alignItems="center">
                   <RepeatIcon className="tweetIcons" />
+                  <div className="tweetIconCount">
                   {tweet.retweet_count}
+                  </div>
                   <FavoriteIcon className="tweetIcons" />
+                  <div className="tweetIconCount">
                   {tweet.favorite_count}
+                  </div>
                 </Grid>
               </CardContent>
             </Grid>
@@ -108,6 +112,7 @@ class ShowTweet extends Component {
   };
 }
 
+// todo
 ShowTweet.propTypes = {
   tweet: PropTypes.shape({
     user: PropTypes.shape({

@@ -12,10 +12,10 @@ class TwitterTrend < ApplicationRecord
       req = Net::HTTP::Get.new(uri.request_uri)
       req['Authorization'] = "Bearer #{ENV["BEARER_TOKEN"]}"
 
-      response_body = https.request(req).body
-      JSON.parse(response_body)
       # response_json = JSON.parse(response_body)
       # response_json[0]['trends']
+      response_body = https.request(req).body
+      JSON.parse(response_body)
     end
 
     # todo controllerでcreate

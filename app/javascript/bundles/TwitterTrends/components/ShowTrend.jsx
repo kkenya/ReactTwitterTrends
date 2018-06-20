@@ -1,17 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
 
 import ShowHeader from './ShowHeader';
 import TweetsList from './TweetsList';
 
 const ShowTrend = ({ match, location }) => {
   const trend = location.state.trend;
+  // {/*<Typography component="h2" color="textSecondary">*/}
+  // {/*Tweet volume {trend.tweet_volume}*/}
+  // {/*</Typography>*/}
   const tweet_volume = trend.tweet_volume ?
-    <Typography component="h2" color="textSecondary">
+    <h2 className="trendSubTitle">
       Tweet volume {trend.tweet_volume}
-    </Typography>
+    </h2>
     : null;
 
   // todo タイトル大きくする
@@ -23,9 +25,10 @@ const ShowTrend = ({ match, location }) => {
       <Grid container justify="center" spacing={8}>
         <Grid item xs={10}>
           <Grid container justify="center" direction="row" className="showTrend">
-            <Grid item xs={5}> <Typography gutterBottom variant="headline" component="h1">
-              {trend.name}
-            </Typography>
+            <Grid item xs={5}>
+              <h1 className="trendTitle">
+                {trend.name}
+              </h1>
               {tweet_volume}
             </Grid>
             <Grid item xs={5} className="tweetList">

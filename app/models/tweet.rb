@@ -4,8 +4,8 @@ class Tweet < ApplicationRecord
 
   class << self
     def request_api(query)
-      q = CGI.escape(query)
-      count = 50
+      q = CGI.escape("#{query} exclude:retweets")
+      count = 100
       uri = URI.parse("https://api.twitter.com/1.1/search/tweets.json?q=#{q}&count=#{count}")
       https = Net::HTTP.new(uri.host, uri.port)
       https.use_ssl = true
